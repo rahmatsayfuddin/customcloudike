@@ -45,6 +45,8 @@
 	<script src="<?php echo base_url()?>/asset/js/jquery.imgcheckbox.min.js"></script>
 	<link href="<?php echo base_url()?>/asset/css/animation.imgcheckbox.min.css" rel="stylesheet">
 	
+	<script src="<?php echo base_url()?>/asset/js/tree.jquery.js"></script>
+	<link rel="stylesheet" href="<?php echo base_url()?>/asset/css/jqtree.css">
 
 
 </head>

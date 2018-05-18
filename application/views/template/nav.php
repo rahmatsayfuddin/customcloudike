@@ -60,12 +60,17 @@
    			<!-- END TASKS -->
    			<!-- SEARCH -->
    			<li class="xn-search pull-right">
-   				<form role="form" action="<?php echo site_url() ?>/home/search">
-   					<input type="text" name="query" placeholder="Search..."/>
-   				</form>
-   			</li>   
-   			<!-- END SEARCH -->
+               <?php 
+               $placeholder ="Search...";
+               if (isset($_GET['query'])){
+                  $placeholder=$_GET['query'];
+               }  ?>
+               <form role="form" action="<?php echo site_url() ?>/home/search">
+                  <input type="text" name="query" placeholder="<?php echo $placeholder ?>"/>
+               </form>
+            </li>   
+            <!-- END SEARCH -->
 
-   		</ul>
-   		<!-- END X-NAVIGATION VERTICAL -->                     
+         </ul>
+         <!-- END X-NAVIGATION VERTICAL -->                     
 

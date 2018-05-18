@@ -55,6 +55,7 @@ class Home extends CI_Controller {
 		$metadata['controller']=$this;
 		$metadata['list']=$this->m_home->get_search($param);
 		$metadata['list']['path']='/';
+		$data['active']['search']='active';
 		$data['content']=$this->load->view('home',$metadata,true);	
 		//echo json_encode($metadata['list']['content']);
 		$this->load->view('main',$data);
@@ -205,24 +206,24 @@ class Home extends CI_Controller {
 				if($diff < 86400) return floor($diff / 3600) . ' hours ago';
 			}
 			if($day_diff == 1) { return 'Yesterday'.date(' h:i:s A', $ts); }
-				return date('d F Y h:i:s A', $ts);
-			} else {
-				$diff = abs($diff);
-				$day_diff = floor($diff / 86400);
-				if($day_diff == 0) {
-					if($diff < 120) { return 'in a minute'; }
-					if($diff < 3600) { return 'in ' . floor($diff / 60) . ' minutes'; }
-					if($diff < 7200) { return 'in an hour'; }
-					if($diff < 86400) { return 'in ' . floor($diff / 3600) . ' hours'; }
-				}
-				if($day_diff == 1) { return 'Tomorrow'; }
-				if($day_diff < 4) { return date('l', $ts); }
-				if($day_diff < 7 + (7 - date('w'))) { return 'next week'; }
-				if(ceil($day_diff / 7) < 4) { return 'in ' . ceil($day_diff / 7) . ' weeks'; }
-				if(date('n', $ts) == date('n') + 1) { return 'next month'; }
-				return date('d F Y h:i:s A', $ts);
+			return date('d F Y h:i:s A', $ts);
+		} else {
+			$diff = abs($diff);
+			$day_diff = floor($diff / 86400);
+			if($day_diff == 0) {
+				if($diff < 120) { return 'in a minute'; }
+				if($diff < 3600) { return 'in ' . floor($diff / 60) . ' minutes'; }
+				if($diff < 7200) { return 'in an hour'; }
+				if($diff < 86400) { return 'in ' . floor($diff / 3600) . ' hours'; }
 			}
+			if($day_diff == 1) { return 'Tomorrow'; }
+			if($day_diff < 4) { return date('l', $ts); }
+			if($day_diff < 7 + (7 - date('w'))) { return 'next week'; }
+			if(ceil($day_diff / 7) < 4) { return 'in ' . ceil($day_diff / 7) . ' weeks'; }
+			if(date('n', $ts) == date('n') + 1) { return 'next month'; }
+			return date('d F Y h:i:s A', $ts);
 		}
-
-
 	}
+
+
+}
