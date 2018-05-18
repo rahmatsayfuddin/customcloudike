@@ -104,7 +104,7 @@ class M_home extends CI_Model {
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL=>"https://saas.cloudike.com/api/2/files/download_as_archive/",
+			CURLOPT_URL=>url_cloudike."/files/download_as_archive/",
 			CURLOPT_RETURNTRANSFER=> 1,
 			CURLOPT_POSTFIELDS=>json_encode($param,JSON_UNESCAPED_SLASHES ),
 			CURLOPT_POST=>1,
@@ -141,7 +141,7 @@ class M_home extends CI_Model {
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL=>"https://saas.cloudike.com/api/2/fileops/multi/delete/",
+			CURLOPT_URL=>url_cloudike."/fileops/multi/delete/",
 			CURLOPT_RETURNTRANSFER=> 1,
 			CURLOPT_POSTFIELDS=>json_encode($param,JSON_UNESCAPED_SLASHES ),
 			CURLOPT_POST=>1,
@@ -213,7 +213,7 @@ class M_home extends CI_Model {
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => "https://saas.cloudike.com/api/2/fileops/rename/",
+			CURLOPT_URL => url_cloudike."/fileops/rename/",
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => "",
 			CURLOPT_MAXREDIRS => 10,
@@ -245,7 +245,7 @@ class M_home extends CI_Model {
 		$curl = curl_init();
 
 		curl_setopt_array($curl, 	array(
-			CURLOPT_URL => "https://saas.cloudike.com/api/2/fileops/folder_create/",
+			CURLOPT_URL => url_cloudike."/fileops/folder_create/",
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => "",
 			CURLOPT_MAXREDIRS => 10,
@@ -277,7 +277,7 @@ class M_home extends CI_Model {
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => "https://saas.cloudike.com/api/2/metadata/skv/?listing=0",
+			CURLOPT_URL => url_cloudike."/metadata/skv/?listing=0",
 			//url_cloudike."/metadata/".$param."?listing=0",
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => "",
@@ -309,7 +309,7 @@ class M_home extends CI_Model {
 		$curl = curl_init();
 
 		curl_setopt_array($curl, 	array(
-			CURLOPT_URL => "https://saas.cloudike.com/api/2/links/create/",
+			CURLOPT_URL => url_cloudike."/links/create/",
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => "",
 			CURLOPT_MAXREDIRS => 10,
@@ -341,7 +341,7 @@ class M_home extends CI_Model {
 		$curl = curl_init();
 
 		curl_setopt_array($curl, 	array(
-			CURLOPT_URL => "https://saas.cloudike.com/api/2/shares/add/",
+			CURLOPT_URL => url_cloudike."/shares/add/",
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => "",
 			CURLOPT_MAXREDIRS => 10,
@@ -373,7 +373,7 @@ class M_home extends CI_Model {
 		$curl = curl_init();
 
 		curl_setopt_array($curl, 	array(
-			CURLOPT_URL => "https://saas.cloudike.com/api/2/links/delete/",
+			CURLOPT_URL => url_cloudike."/links/delete/",
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => "",
 			CURLOPT_MAXREDIRS => 10,
@@ -405,7 +405,7 @@ class M_home extends CI_Model {
 		$curl = curl_init();
 
 		curl_setopt_array($curl, 	array(
-			CURLOPT_URL => "https://saas.cloudike.com/api/2/shares/unshare/",
+			CURLOPT_URL => url_cloudike."/shares/unshare/",
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => "",
 			CURLOPT_MAXREDIRS => 10,

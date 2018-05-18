@@ -7,7 +7,7 @@ class M_shared extends CI_Model {
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => "https://saas.cloudike.com/api/2/shares/",
+			CURLOPT_URL => url_cloudike."/shares/",
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => "",
 			CURLOPT_MAXREDIRS => 10,
@@ -38,7 +38,7 @@ class M_shared extends CI_Model {
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => "https://saas.cloudike.com/api/2/links/",
+			CURLOPT_URL => url_cloudike."/links/",
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => "",
 			CURLOPT_MAXREDIRS => 10,

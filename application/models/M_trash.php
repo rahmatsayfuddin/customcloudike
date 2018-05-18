@@ -7,7 +7,7 @@ class M_trash extends CI_Model {
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => "https://saas.cloudike.com/api/2/trash/?limit=500&offset=0&order_by=name",
+			CURLOPT_URL => url_cloudike."/trash/?limit=500&offset=0&order_by=name",
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => "",
 			CURLOPT_MAXREDIRS => 10,
@@ -39,7 +39,7 @@ class M_trash extends CI_Model {
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL=>"https://saas.cloudike.com/api/2/trash/restore/".$param['name'],
+			CURLOPT_URL=>url_cloudike."/trash/restore/".$param['name'],
 			CURLOPT_RETURNTRANSFER=> 1,
 			CURLOPT_POSTFIELDS=>json_encode($param,JSON_UNESCAPED_SLASHES ),
 			CURLOPT_POST=>1,
@@ -69,7 +69,7 @@ class M_trash extends CI_Model {
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL=>"https://saas.cloudike.com/api/2/trash/clear/",
+			CURLOPT_URL=>url_cloudike."/trash/clear/",
 			CURLOPT_RETURNTRANSFER=> 1,
 			CURLOPT_POST=>1,
 			CURLOPT_HTTPHEADER => array(
