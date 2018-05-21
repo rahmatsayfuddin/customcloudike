@@ -44,6 +44,48 @@ class Home extends CI_Controller {
 
 	}
 
+	public function get_list()
+	{
+		if (isset($_GET['path'])) {
+			$param=$_GET['path'];
+		}
+		else{
+			$param='';
+		}
+		$metadata['list']=$this->m_home->get_list($param);
+		echo json_encode($metadata['list']);
+
+	}
+
+	public function movecopy()
+	{
+		$param['to_path']=$_POST['to_path'];
+		foreach ($_POST['from_path'] as $from_path) {
+			$param['from_path'] = $from_path;
+			echo json_encode($param);
+			if($_POST["copy"]) {
+				$this->m_home->copy($param);
+			}
+			if($_POST["move"]) {
+				$this->m_home->move($param);
+			}
+
+		}
+
+		if($_POST["copy"]) {
+
+			$this->session->set_flashdata('message', 'Copy successfully');
+		}
+		if($_POST["move"]) {
+
+			$this->session->set_flashdata('message', 'Move successfully');
+		}
+		$this->session->set_flashdata('message_type', 'success');
+		redirect('?param='.$param['to_path']);		
+	}
+
+
+
 	public function search($value='')
 	{
 		if (isset($_GET['query'])) {

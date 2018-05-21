@@ -21,7 +21,7 @@ while((array_pop($arr) and !empty($arr))){
      <div class="breadcrumb" style="margin-bottom: 0">
 
        <div class="col-sm-12">
-         <div class="col-md-6">
+        <div class="col-md-4">
 
           <!-- START BREADCRUMB -->
           <ul class="breadcrumb">
@@ -34,28 +34,32 @@ while((array_pop($arr) and !empty($arr))){
 
       </div>
 
-      <div class="col-md-6">
-       <div class="col-md-6">
-        <a href="" class="btn btn-info btn-rounded" data-toggle="modal" data-target="#new_folder" >
-         New Folder
-       </a> 
-       <button type="button" class=" btn btn-info btn-file">
-         <i class="fa fa-cloud-upload"></i>
-         upload <input type="file"  name="fileToUpload" id="fileToUpload">
-       </button>
-     </div>
-     <div class="col-md-6">
-      <button type="button" class=" btn btn-rounded btn-info" id="multy_download" onclick="multy_download()">
-        <i class="fa fa-cloud-download"></i>
-        Download
-      </button>
-      <button type="button" class=" btn btn-info" id="multy_delete" data-toggle='modal' data-target='#multy_delete_confirmation' >
-        <i class="fa fa-trash-o"></i>
-        Delete 
-      </button>
+      <div class="col-md-8">
+        <div class="col-md-4">
+          <a href="" class="btn btn-info btn-rounded" data-toggle="modal" data-target="#new_folder" >
+           New Folder
+         </a> 
+         <button type="button" class=" btn btn-info btn-file">
+           <i class="fa fa-cloud-upload"></i>
+           upload <input type="file"  name="fileToUpload" id="fileToUpload">
+         </button>
+       </div>
+       <div class="col-md-8">
+        <button type="button" class=" btn btn-rounded btn-info hide-button" id="movecopy" data-toggle="modal" data-target="#movecopymodal">
+          <i class="fa fa-share-square"></i>
+          Move  Or copy
+        </button>
+        <button type="button" class=" btn btn-rounded btn-info hide-button" id="multy_download" onclick="multy_download()">
+          <i class="fa fa-cloud-download"></i>
+          Download
+        </button>
+        <button type="button" class=" btn btn-info hide-button" id="multy_delete" data-toggle='modal' data-target='#multy_delete_confirmation' >
+          <i class="fa fa-trash-o"></i>
+          Delete 
+        </button>
+      </div>
     </div>
   </div>
-</div>
 </div>
 
 <!-- END breadcrumb -->              
@@ -101,74 +105,74 @@ while((array_pop($arr) and !empty($arr))){
       <label for="<?php echo  $list['path'] ?>">
         <?php if ($list['folder']): ?>
           <i class="fa fa-folder "></i>
-        <?php else: ?>
-         <i class="fa <?php echo $controller->icon($list['mime_type']);?>"></i>
-       <?php endif ?>
-     </label>
-   </td>
-   <td style="vertical-align:middle;">
-    <?php
-    $exploded = explode('/', $list['path']);  
-    if ($list['folder']) {
-     echo "<a href='".site_url().'/home?path='.$list['path']."'>".end($exploded)." </a>";
-   }
-   else{
-    echo end($exploded);  
-  }
-
-
-  ?>
-
-</td>
-<td style="vertical-align:middle;">
-
-  <a href="" data-toggle='modal' data-target='#share' data-hash='<?php echo $list['public_hash']?>' data-path='<?php echo $list['path']?>' data-full='<?php echo json_encode($list) ?>' >
-    <?php if (empty($list['public_hash'])): ?>
-      <i class="fa fa-share-alt fa-2x"  data-toggle="tooltip" data-placement="top" title="Share"></i>
-    <?php else: ?>
-      <i class="fa fa-link text-yellow fa-2x"  data-toggle="tooltip" data-placement="top" title="Shared"></i>
-    <?php endif ?>
-  </a>
-</td>
-<td style="vertical-align:middle;">
- <div class="dropdown">
-  <a class="dropdown-toggle" type="button" data-toggle="dropdown">
-    <span class="fa fa-ellipsis-h"></span></a>
-    <ul class="dropdown-menu">
-      <li>
-        <a href="#"  data-toggle='modal' data-target='#ubah_nama' data-nama='<?php echo end($exploded);  ?>' data-path='<?php echo $list['path'] ?>'>
-          <i class="fa fa-pencil"></i>Ubah Nama</a>
-        </li> 
-        <li>
-          <?php if ($list['folder']): ?>
-            <a href="<?php echo site_url().'/home/multiple_download/?path[]='.$list['path'];?>" ><i class="fa fa-cloud-download"></i>Unduh</a>
           <?php else: ?>
+           <i class="fa <?php echo $controller->icon($list['mime_type']);?>"></i>
+         <?php endif ?>
+       </label>
+     </td>
+     <td style="vertical-align:middle;">
+      <?php
+      $exploded = explode('/', $list['path']);  
+      if ($list['folder']) {
+       echo "<a href='".site_url().'/home?path='.$list['path']."'>".end($exploded)." </a>";
+     }
+     else{
+      echo end($exploded);  
+    }
 
-            <a href="<?php echo site_url().'/home/download/'.urlencode(rtrim(base64_encode($list['path']),'='));?>" ><i class="fa fa-cloud-download"></i>Unduh</a>
-          <?php endif ?>
-        </li> 
-        <li>
-          <a href="#" data-toggle='modal' data-target='#delete_confirmation' data-path='<?php echo $list['path'] ?>'>
-            <i class="fa fa-trash-o"></i>
-            Hapus
-          </a>
-        </li>
-      </ul>
-    </div>
+
+    ?>
+
   </td>
-  <td style="vertical-align:middle;"><?php echo byte_format($list['bytes']) ?></td>
   <td style="vertical-align:middle;">
-   <?php echo $controller->time2str(substr($list['modified'],0,10))  ?> </td>
-   <td style="vertical-align:middle;">
-    <?php if ($list['folder']): ?>
-      <?php if ($list['shared']): ?>
-        <i class="fa fa-users fa-2x" data-toggle="tooltip" data-placement="top" title="Shared to others"></i>
-      <?php endif ?>
-    <?php endif ?>
-  </td>
-</tr>
-<?php endforeach ?>
-</tbody>
+
+    <a href="" data-toggle='modal' data-target='#share' data-hash='<?php echo $list['public_hash']?>' data-path='<?php echo $list['path']?>' data-full='<?php echo json_encode($list) ?>' >
+      <?php if (empty($list['public_hash'])): ?>
+        <i class="fa fa-share-alt fa-2x"  data-toggle="tooltip" data-placement="top" title="Share"></i>
+        <?php else: ?>
+          <i class="fa fa-link text-yellow fa-2x"  data-toggle="tooltip" data-placement="top" title="Shared"></i>
+        <?php endif ?>
+      </a>
+    </td>
+    <td style="vertical-align:middle;">
+     <div class="dropdown">
+      <a class="dropdown-toggle" type="button" data-toggle="dropdown">
+        <span class="fa fa-ellipsis-h"></span></a>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="#"  data-toggle='modal' data-target='#ubah_nama' data-nama='<?php echo end($exploded);  ?>' data-path='<?php echo $list['path'] ?>'>
+              <i class="fa fa-pencil"></i>Ubah Nama</a>
+            </li> 
+            <li>
+              <?php if ($list['folder']): ?>
+                <a href="<?php echo site_url().'/home/multiple_download/?path[]='.$list['path'];?>" ><i class="fa fa-cloud-download"></i>Unduh</a>
+                <?php else: ?>
+
+                  <a href="<?php echo site_url().'/home/download/'.urlencode(rtrim(base64_encode($list['path']),'='));?>" ><i class="fa fa-cloud-download"></i>Unduh</a>
+                <?php endif ?>
+              </li> 
+              <li>
+                <a href="#" data-toggle='modal' data-target='#delete_confirmation' data-path='<?php echo $list['path'] ?>'>
+                  <i class="fa fa-trash-o"></i>
+                  Hapus
+                </a>
+              </li>
+            </ul>
+          </div>
+        </td>
+        <td style="vertical-align:middle;"><?php echo byte_format($list['bytes']) ?></td>
+        <td style="vertical-align:middle;">
+         <?php echo $controller->time2str(substr($list['modified'],0,10))  ?> </td>
+         <td style="vertical-align:middle;">
+          <?php if ($list['folder']): ?>
+            <?php if ($list['shared']): ?>
+              <i class="fa fa-users fa-2x" data-toggle="tooltip" data-placement="top" title="Shared to others"></i>
+            <?php endif ?>
+          <?php endif ?>
+        </td>
+      </tr>
+    <?php endforeach ?>
+  </tbody>
 </table>
 <?php if (empty($content)): ?>
  <div class="col-md-12">
@@ -365,6 +369,35 @@ while((array_pop($arr) and !empty($arr))){
   </div>
 </div>
 
+<div id="movecopymodal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Move or Copy</h4>
+      </div>
+      <div class="modal-body">
+        <h3>Choose Your Destination</h3>
+        <div id="tree1"></div>
+        <form action="<?php echo site_url()?>/home/movecopy" method="POST" id='movecopyform' />
+          <input type="hidden" name="to_path" id="to_path" >
+          <input class='btn btn-warning movecopy' type="submit" value="move" name="move" disabled  />
+          or
+          <input class='btn btn-default movecopy' type="submit" value="copy" name="copy"  disabled  />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
 <style type="text/css">
 .errspan {
   float: right;
@@ -375,6 +408,184 @@ while((array_pop($arr) and !empty($arr))){
   color: red;
 }
 </style>
+
+<script type="text/javascript">
+  $('#movecopymodal').on('show.bs.modal', function (event) {
+    $('.movecopy').prop('disabled', true);
+    var checkedValue = $('.cb:checked').val();
+    var values = $('input:checkbox:checked.cb').map(function () {
+      return this.value;
+    }).get();
+    $.each( values, function( key, value ) {
+      $( "#movecopyform" ).append("<input type='hidden'  name='from_path[]' value="+value+">");
+    //alert( key + ": " + value );
+  });
+
+
+  }) 
+</script>
+<script type="text/javascript">
+
+  var parts = window.location.search.substr(1).split("&");
+  var $_GET = {};
+  for (var i = 0; i < parts.length; i++) {
+    var temp = parts[i].split("=");
+    $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
+  }
+  var data = [];
+  if (typeof $_GET.path !== 'undefined') {
+    $.ajax({
+      method: "POST",
+      dataType: "json",
+      url: "<?php echo site_url()?>/home/get_list?path=/"
+    }) .done(function( msg ) {
+
+      var content = msg.content;
+      for (var i = content.length - 1; i >= 0; i--) {
+
+        if (content[i].folder) {
+          data.push({name :content[i].path,children:[{name:'',id:content[i].path+'kosong'}],id:content[i].path});
+
+
+        }
+      }
+
+      $('#tree1').tree({
+        data: data,
+        "load_on_demand": true
+      });
+      //console.log(data);
+      var $tree = $('#tree1')
+
+      var parsename =$_GET.path;
+      var arrname =parsename.split("/");
+
+
+
+      for (var i = 1; i < arrname.length; i++) {
+        var node = $tree.tree('getNodeById', '/'+arrname[i]);
+        $tree.tree('openNode', node);
+      }
+
+
+    });
+
+
+  }
+  else{
+    var content = <?php echo json_encode($content)?>;
+    for (var i = content.length - 1; i >= 0; i--) {
+
+      if (content[i].folder) {
+        var parsename =content[i].path;
+        var arrname =parsename.split("/");
+        var realname =arrname[arrname.length - 1];
+        data.push({name :realname,children:[{name:'',id:content[i].path+'kosong'}],id:content[i].path});
+    //console.log(content[i]);
+
+  }
+
+}
+
+$('#tree1').tree({
+  data: data,
+  "load_on_demand": true
+});
+
+}
+
+
+
+
+
+
+$(function() {
+
+
+
+  $('#tree1').on(
+    'tree.open',
+    function(e) {
+
+      $.ajax({
+        method: "POST",
+        dataType: "json",
+        url: "<?php echo site_url()?>/home/get_list?path="+e.node.id
+      }) .done(function( msg ) {
+
+        var $tree = $('#tree1');
+        var parent_node = $tree.tree('getNodeById', e.node.id);
+
+        var node = $tree.tree('getNodeById', e.node.id+'kosong');
+        $('#tree1').tree('removeNode', node);
+
+        var content = msg.content;
+        for (var i = content.length - 1; i >= 0; i--) {
+
+          if (content[i].folder) {
+            // data.push({name :content[i].path,children:[{name:'',id:content[i].path+'kosong'}],id:content[i].path});
+
+            var parsename =content[i].path;
+            var arrname =parsename.split("/");
+            var realname =arrname[arrname.length - 1];
+
+
+            $tree.tree(
+              'appendNode',
+              {
+                name: realname,
+                id: content[i].path,
+                children:[{name:'',id:content[i].path+'kosong'}]
+              },
+              parent_node
+              );
+
+
+            var openparsename =$_GET.path;
+            var openarrname =openparsename.split("/");
+            if(openarrname.includes(realname)){
+              console.log('/'+realname);
+              var node = $tree.tree('getNodeById', content[i].path);
+              $tree.tree('openNode', node);
+            }
+
+
+          }
+        }
+
+
+
+
+
+      });
+
+    }
+
+    );
+
+  $('#tree1').on(
+    'tree.select',
+    function(event) {
+      if (event.node) {
+            // node was selected
+            var node = event.node;
+            //console.log(node);
+            $("#to_path").val(node.id);
+            $('.movecopy').prop('disabled', false);
+          }
+          else {
+            // event.node is null
+            // a node was deselected
+            // e.previous_node contains the deselected node
+          }
+        }
+        );
+
+
+});
+</script>
+
+
 <script >
 
   function multy_download() {
@@ -388,8 +599,7 @@ while((array_pop($arr) and !empty($arr))){
     //$.get( "<?php echo site_url() ?>/home/multiple_download", { "path[]": values} );
   }
   $(document).ready(function(){
-    $("#multy_download").hide();
-    $("#multy_delete").hide();
+    $(".hide-button").hide();
   });
   function count_checkbox() {
     var $checkboxes = $('.cb');
@@ -405,14 +615,13 @@ while((array_pop($arr) and !empty($arr))){
     }
 
     if (countCheckedCheckboxes>0) {
-     $("#multy_download").show();
-     $("#multy_delete").show();
+      $(".hide-button").show();
+    }
+    else{
+     $(".hide-button").hide();
+     $(".hide-button").hide();
    }
-   else{
-     $("#multy_download").hide();
-     $("#multy_delete").hide();
-   }
-   console.log(countCheckedCheckboxes);
+
  }
 </script>
 <script type="text/javascript">
