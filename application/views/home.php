@@ -417,7 +417,7 @@ while((array_pop($arr) and !empty($arr))){
       return this.value;
     }).get();
     $.each( values, function( key, value ) {
-      $( "#movecopyform" ).append("<input type='hidden'  name='from_path[]' value="+value+">");
+      $( "#movecopyform" ).append("<input type='hidden'  name='from_path[]' value="+encodeURIComponent(value)+">");
     //alert( key + ": " + value );
   });
 
@@ -570,7 +570,7 @@ $(function() {
             // node was selected
             var node = event.node;
             //console.log(node);
-            $("#to_path").val(node.id);
+            $("#to_path").val(encodeURIComponent(node.id));
             $('.movecopy').prop('disabled', false);
           }
           else {

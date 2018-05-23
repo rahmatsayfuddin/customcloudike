@@ -437,7 +437,7 @@ class M_home extends CI_Model {
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => url_cloudike."/fileops/copy/",
+			CURLOPT_URL => url_cloudike."/fileops/move/",
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => "",
 			CURLOPT_MAXREDIRS => 10,
@@ -469,7 +469,7 @@ class M_home extends CI_Model {
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => url_cloudike."/fileops/move/",
+			CURLOPT_URL => url_cloudike."/fileops/copy/",
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => "",
 			CURLOPT_MAXREDIRS => 10,

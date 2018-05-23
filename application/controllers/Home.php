@@ -59,9 +59,9 @@ class Home extends CI_Controller {
 
 	public function movecopy()
 	{
-		$param['to_path']=$_POST['to_path'];
+		$param['to_path']=urldecode($_POST['to_path']);
 		foreach ($_POST['from_path'] as $from_path) {
-			$param['from_path'] = $from_path;
+			$param['from_path'] = urldecode($from_path);
 			echo json_encode($param);
 			if($_POST["copy"]) {
 				$this->m_home->copy($param);
@@ -81,7 +81,7 @@ class Home extends CI_Controller {
 			$this->session->set_flashdata('message', 'Move successfully');
 		}
 		$this->session->set_flashdata('message_type', 'success');
-		redirect('?param='.$param['to_path']);		
+		redirect('home?path='.$param['to_path']);		
 	}
 
 
