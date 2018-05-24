@@ -35,7 +35,12 @@ class Trash extends CI_Controller {
 		$data['active']['trash']='active';
 		$data['content']=$this->load->view('trash',$metadata,true);	
 		//echo json_encode($metadata['list']);
-		$this->load->view('main',$data);
+
+		if (isset($_SESSION['token']) ) {
+			$this->load->view('main',$data);  
+		}else{  
+			redirect('login');	
+		}
 
 	}
 
@@ -47,9 +52,13 @@ class Trash extends CI_Controller {
 			$this->m_trash->restore($param);
 		}
 
-		$this->session->set_flashdata('message_type', 'success');
-		$this->session->set_flashdata('message', 'Restore successfully');
-		redirect('trash');
+		if (isset($_SESSION['token']) ) {
+			$this->session->set_flashdata('message_type', 'success');
+			$this->session->set_flashdata('message', 'Restore successfully');
+			redirect('trash');
+		}else{  
+			redirect('login');	
+		}
 	}
 
 	public function empty_trash()
@@ -57,9 +66,13 @@ class Trash extends CI_Controller {
 		
 		$this->m_trash->empty_trash();
 
-		$this->session->set_flashdata('message_type', 'success');
-		$this->session->set_flashdata('message', 'Empty trash successfully');
-		redirect('trash');
+		if (isset($_SESSION['token']) ) {
+			$this->session->set_flashdata('message_type', 'success');
+			$this->session->set_flashdata('message', 'Restore successfully');
+			redirect('trash');
+		}else{  
+			redirect('login');	
+		}
 	}
 
 	function time2str($ts) {
@@ -79,63 +92,63 @@ class Trash extends CI_Controller {
 				if($diff < 86400) return floor($diff / 3600) . ' hours ago';
 			}
 			if($day_diff == 1) { return 'Yesterday'.date(' h:i:s A', $ts); }
-				return date('d F Y h:i:s A', $ts);
-			} else {
-				$diff = abs($diff);
-				$day_diff = floor($diff / 86400);
-				if($day_diff == 0) {
-					if($diff < 120) { return 'in a minute'; }
-					if($diff < 3600) { return 'in ' . floor($diff / 60) . ' minutes'; }
-					if($diff < 7200) { return 'in an hour'; }
-					if($diff < 86400) { return 'in ' . floor($diff / 3600) . ' hours'; }
-				}
-				if($day_diff == 1) { return 'Tomorrow'; }
-				if($day_diff < 4) { return date('l', $ts); }
-				if($day_diff < 7 + (7 - date('w'))) { return 'next week'; }
-				if(ceil($day_diff / 7) < 4) { return 'in ' . ceil($day_diff / 7) . ' weeks'; }
-				if(date('n', $ts) == date('n') + 1) { return 'next month'; }
-				return date('d F Y h:i:s A', $ts);
+			return date('d F Y h:i:s A', $ts);
+		} else {
+			$diff = abs($diff);
+			$day_diff = floor($diff / 86400);
+			if($day_diff == 0) {
+				if($diff < 120) { return 'in a minute'; }
+				if($diff < 3600) { return 'in ' . floor($diff / 60) . ' minutes'; }
+				if($diff < 7200) { return 'in an hour'; }
+				if($diff < 86400) { return 'in ' . floor($diff / 3600) . ' hours'; }
 			}
+			if($day_diff == 1) { return 'Tomorrow'; }
+			if($day_diff < 4) { return date('l', $ts); }
+			if($day_diff < 7 + (7 - date('w'))) { return 'next week'; }
+			if(ceil($day_diff / 7) < 4) { return 'in ' . ceil($day_diff / 7) . ' weeks'; }
+			if(date('n', $ts) == date('n') + 1) { return 'next month'; }
+			return date('d F Y h:i:s A', $ts);
 		}
-
-		function icon( $mime_type ) {
-  // List of official MIME Types: http://www.iana.org/assignments/media-types/media-types.xhtml
-			static $font_awesome_file_icon_classes = array(
-    // Images
-				'image' => 'fa-file-image-o',
-    // Audio
-				'audio' => 'fa-file-audio-o',
-    // Video
-				'video' => 'fa-file-video-o',
-    // Documents
-				'application/pdf' => 'fa-file-pdf-o',
-				'text/plain' => 'fa-file-text-o',
-				'text/html' => 'fa-file-code-o',
-				'application/json' => 'fa-file-code-o',
-    // Archives
-				'application/gzip' => 'fa-file-archive-o',
-				'application/zip' => 'fa-file-archive-o',
-    // Misc
-				'application/octet-stream' => 'fa-file-o',
-				'application/vnd.android.package-archive'=> 'fa-android',
-				'application/msword' => 'fa-file-word-o',
-				'application/vnd.ms-excel'=>'fa-file-excel-o',
-				'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'=>'fa-file-excel-o',
-				'application/vnd.openxmlformats-officedocument.wordprocessingml.document'=>'fa-file-word-o',
-				'application/vnd.ms-powerpoint'=>'fa-file-powerpoint-o',
-
-
-			);
-			if (isset($font_awesome_file_icon_classes[ $mime_type ])) {
-				return $font_awesome_file_icon_classes[ $mime_type ];
-			}
-			$mime_parts = explode('/', $mime_type, 2);
-			$mime_group = $mime_parts[0];
-			if (isset($font_awesome_file_icon_classes[ $mime_group ])) {
-				return $font_awesome_file_icon_classes[ $mime_group ];
-			}
-			return "fa-file-o";
-		}
-
-
 	}
+
+	function icon( $mime_type ) {
+  // List of official MIME Types: http://www.iana.org/assignments/media-types/media-types.xhtml
+		static $font_awesome_file_icon_classes = array(
+    // Images
+			'image' => 'fa-file-image-o',
+    // Audio
+			'audio' => 'fa-file-audio-o',
+    // Video
+			'video' => 'fa-file-video-o',
+    // Documents
+			'application/pdf' => 'fa-file-pdf-o',
+			'text/plain' => 'fa-file-text-o',
+			'text/html' => 'fa-file-code-o',
+			'application/json' => 'fa-file-code-o',
+    // Archives
+			'application/gzip' => 'fa-file-archive-o',
+			'application/zip' => 'fa-file-archive-o',
+    // Misc
+			'application/octet-stream' => 'fa-file-o',
+			'application/vnd.android.package-archive'=> 'fa-android',
+			'application/msword' => 'fa-file-word-o',
+			'application/vnd.ms-excel'=>'fa-file-excel-o',
+			'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'=>'fa-file-excel-o',
+			'application/vnd.openxmlformats-officedocument.wordprocessingml.document'=>'fa-file-word-o',
+			'application/vnd.ms-powerpoint'=>'fa-file-powerpoint-o',
+
+
+		);
+		if (isset($font_awesome_file_icon_classes[ $mime_type ])) {
+			return $font_awesome_file_icon_classes[ $mime_type ];
+		}
+		$mime_parts = explode('/', $mime_type, 2);
+		$mime_group = $mime_parts[0];
+		if (isset($font_awesome_file_icon_classes[ $mime_group ])) {
+			return $font_awesome_file_icon_classes[ $mime_group ];
+		}
+		return "fa-file-o";
+	}
+
+
+}

@@ -40,7 +40,12 @@ class Home extends CI_Controller {
 		$data['content']=$this->load->view('home',$metadata,true);	
 		$data['active']['all_files']='active';
 		//echo json_encode($metadata['list']);
-		$this->load->view('main',$data);
+
+		if (isset($_SESSION['token']) ) {
+			$this->load->view('main',$data);
+		}else{  
+			redirect('login');	
+		}
 
 	}
 
@@ -100,7 +105,12 @@ class Home extends CI_Controller {
 		$data['active']['search']='active';
 		$data['content']=$this->load->view('home',$metadata,true);	
 		//echo json_encode($metadata['list']['content']);
-		$this->load->view('main',$data);
+
+		if (isset($_SESSION['token']) ) {
+			$this->load->view('main',$data);
+		}else{  
+			redirect('login');	
+		}
 
 	}
 
@@ -147,7 +157,11 @@ class Home extends CI_Controller {
 	function download($param='')
 	{
 		//echo base64_decode($param);
-		$this->m_home->download(base64_decode($param));
+		if (isset($_SESSION['token']) ) {	
+			$this->m_home->download(base64_decode($param));
+		}else{  
+			redirect('login');	
+		}
 	}
 
 	public function prepare_share()
@@ -187,7 +201,13 @@ class Home extends CI_Controller {
 		$param['is_win']=true;
 		//echo json_encode($param,JSON_UNESCAPED_SLASHES);
 		//echo base64_decode($param);
-		$this->m_home->multiple_download($param);
+		if (isset($_SESSION['token']) ) {	
+			$this->m_home->multiple_download($param);
+		}else{  
+			redirect('login');	
+		}
+
+
 	}
 
 	public function delete()
@@ -197,7 +217,14 @@ class Home extends CI_Controller {
 
 		$this->session->set_flashdata('message_type', 'success');
 		$this->session->set_flashdata('message', 'Folder deleted successfully');
-		redirect('home?path='.$_GET['base_path']);	
+
+
+		if (isset($_SESSION['token']) ) {		
+			redirect('home?path='.$_GET['base_path']);	
+		}else{  
+			redirect('login');	
+		}
+
 
 	}
 
