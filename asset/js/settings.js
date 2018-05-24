@@ -1,49 +1,9 @@
-var site_settings = '<div class="ts-button">'
-        +'<span class="fa fa-cogs fa-spin"></span>'
-    +'</div>'
-    +'<div class="ts-body">'
-	    +'<div class="ts-title">Themes</div>'
-        +'<div class="ts-themes">'
-            +'<a href="#" class="active" data-theme="css/theme-default.css"><img src="img/themes/default.jpg"/></a>'            
-            +'<a href="#" data-theme="css/theme-brown.css"><img src="img/themes/brown.jpg"/></a>'
-            +'<a href="#" data-theme="css/theme-blue.css"><img src="img/themes/blue.jpg"/></a>'                        
-            +'<a href="#" data-theme="css/theme-white.css"><img src="img/themes/light.jpg"/></a>'            
-            +'<a href="#" data-theme="css/theme-black.css"><img src="img/themes/black.jpg"/></a>'
-        +'</div>'
-		+'<div class="ts-title">Layout</div>'
-        +'<div class="ts-row">'
-            +'<label class="check"><input type="radio" class="iradio" name="st_layout_boxed" value="0" checked/> Full Width</label>'
-        +'</div>'
-        +'<div class="ts-row">'
-            +'<label class="check"><input type="radio" class="iradio" name="st_layout_boxed" value="1"/> Boxed</label>'
-        +'</div>'
-        +'<div class="ts-title">Options</div>'
-        +'<div class="ts-row">'
-            +'<label class="check"><input type="checkbox" class="icheckbox" name="st_head_fixed" value="1"/> Fixed Header</label>'
-        +'</div>'
-        +'<div class="ts-row">'
-            +'<label class="check"><input type="checkbox" class="icheckbox" name="st_sb_fixed" value="1" checked/> Fixed Sidebar</label>'
-        +'</div>'
-        +'<div class="ts-row">'
-            +'<label class="check"><input type="checkbox" class="icheckbox" name="st_sb_scroll" value="1"/> Scroll Sidebar</label>'
-        +'</div>'
-        +'<div class="ts-row">'
-            +'<label class="check"><input type="checkbox" class="icheckbox" name="st_sb_right" value="1"/> Right Sidebar</label>'
-        +'</div>'
-        +'<div class="ts-row">'
-            +'<label class="check"><input type="checkbox" class="icheckbox" name="st_sb_custom" value="1"/> Custom Navigation</label>'
-        +'</div>'
-        +'<div class="ts-row">'
-            +'<label class="check"><input type="checkbox" class="icheckbox" name="st_sb_toggled" value="1"/> Toggled Navigation</label>'
-        +'</div>'
-        
-        
-    +'</div>';
-    
+var site_settings = '';
+
 var settings_block = document.createElement('div');
-    settings_block.className = "theme-settings";
-    settings_block.innerHTML = site_settings;
-    document.body.appendChild(settings_block);
+settings_block.className = "theme-settings";
+settings_block.innerHTML = site_settings;
+document.body.appendChild(settings_block);
 
 $(document).ready(function(){
 
@@ -66,7 +26,7 @@ $(document).ready(function(){
         var input   = $(this);
 
         if(input.attr("name") != 'st_layout_boxed'){
-                
+            
             if(!input.prop("checked")){
                 theme_settings[input.attr("name")] = input.val();
             }else{            
@@ -143,14 +103,14 @@ function set_settings(theme_settings,option){
     if(theme_settings.st_sb_fixed == 1){        
         $(".page-sidebar").addClass("page-sidebar-fixed");
     }else
-        $(".page-sidebar").removeClass("page-sidebar-fixed");
+    $(".page-sidebar").removeClass("page-sidebar-fixed");
     /* END Sidebar Fixed */
     
     /* Start Sidebar Fixed */
     if(theme_settings.st_sb_scroll == 1){          
         $(".page-sidebar").addClass("scroll").mCustomScrollbar("update");        
     }else
-        $(".page-sidebar").removeClass("scroll").css("height","").mCustomScrollbar("disable",true);
+    $(".page-sidebar").removeClass("scroll").css("height","").mCustomScrollbar("disable",true);
     
     /* END Sidebar Fixed */
     
@@ -207,7 +167,7 @@ function set_settings_checkbox(name,value){
         $(".theme-settings").find("input[name="+name+"]").prop("checked",false).parent("div").removeClass("checked");
         
         var input = $(".theme-settings").find("input[name="+name+"][value="+value+"]");
-                
+        
         input.prop("checked",true);
         input.parent("div").addClass("checked");        
         
@@ -232,6 +192,6 @@ function set_settings_checkbox(name,value){
             input.prop("disabled",true);            
             input.parent("div").addClass("disabled").parent(".check").addClass("disabled");
         }        
-                
+        
     }
 }
