@@ -1266,9 +1266,6 @@ body.page-container-boxed .page-container {
   .list-group .list-group-item.active .badge {
     color: #22262e;
   }
-  .list-group .list-group-item:last-child {
-    border-bottom: 0px;
-  }
   .list-group.list-group-simple {
     border: 0px;
     background: transparent;
