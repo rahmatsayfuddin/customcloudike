@@ -49,6 +49,7 @@ class Login extends CI_Controller {
 			$_SESSION['token']=$user['token'];
 			$_SESSION['email']=$user['login'];
 			$_SESSION['name']=$user['name'];
+			$_SESSION['userid']=$user['userid'];
 			redirect('home');
 		}
 	}
