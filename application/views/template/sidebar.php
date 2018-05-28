@@ -3,16 +3,16 @@
    		<!-- START X-NAVIGATION -->
    		<ul class="x-navigation">
    			<li class="xn-logo">
-   				<a href="index.html">Logo</a>
+   				<a href="/"><img src="<?php echo base_url() ?>/asset/img/logo_splash.png" class="img-responsive"></a>
    				<a href="#" class="x-navigation-control"></a>
    			</li>
    			<li class="xn-profile">
    				<div class="profile-mini">
-   					<img src="assets/images/users/avatar.jpg" alt="John Doe"/>
+   					<img src="<?php echo base_url() ?>/asset/assets/images/users/avatar.jpg" alt="John Doe"/>
    				</div>
    				<div class="profile">
    					<div class="profile-image">
-   						<img src="assets/images/users/avatar.jpg" alt="John Doe"/>
+   						<img src="<?php echo base_url() ?>/asset/assets/images/users/avatar.jpg" alt="John Doe"/>
    					</div>
    					<div class="profile-data">
    						<div class="profile-data-name">John Doe</div>
