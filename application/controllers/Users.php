@@ -12,6 +12,7 @@ class Users extends CI_Controller {
 	{
 		$user['data']= $this->m_users->get();
 		$content['data']=$this->load->view('account',$user,true);
+		$content['account']='active';
 		$data['content']=$this->load->view('template/user_panel',$content,true);	
 		$data['active']['account']='active';
 		if (isset($_SESSION['token']) ) {
@@ -23,9 +24,10 @@ class Users extends CI_Controller {
 	{
 		$user['order']=$this->m_users->get_order();
 		$user['data']= $this->m_users->get();
+		$content['detail_account']='active';
 		$content['data']=$this->load->view('detail_account',$user,true);
 		$data['content']=$this->load->view('template/user_panel',$content,true);	
-		$data['active']['account']='active';
+		$data['active']['detail_account']='active';
 		if (isset($_SESSION['token']) ) {
 			$this->load->view('main',$data);
 		}
@@ -33,7 +35,15 @@ class Users extends CI_Controller {
 
 	public function activity_log()
 	{
-		
+		$param['limit']='50';
+		$user['log']=$this->m_users->get_activity_log($param);
+		$content['log']='active';
+		$content['data']=$this->load->view('activity_log',$user,true);
+		$data['content']=$this->load->view('template/user_panel',$content,true);	
+		$data['active']['detail_account']='active';
+		if (isset($_SESSION['token']) ) {
+			$this->load->view('main',$data);
+		}
 	}
 
 	public function update()
