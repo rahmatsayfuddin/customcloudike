@@ -55,7 +55,7 @@
    			<!-- END MESSAGES -->
    			<!-- TASKS -->
    			<li class="xn-icon-button pull-right">
-   				<a href="#"><span class="fa fa-question-circle"></span></a>
+   				<a href="<?php echo site_url() ?>/users"><span class="fa fa-user"></span></a>
    			</li>
    			<!-- END TASKS -->
    			<!-- SEARCH -->
