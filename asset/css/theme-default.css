@@ -919,7 +919,7 @@ body.page-container-boxed .page-container {
   }*/
   .x-navigation > li.xn-profile {
     padding: 0px;
-    border-bottom: 1px solid #222A38;
+    /*border-bottom: 1px solid #222A38;*/
   }
   .x-navigation > li.xn-profile .profile-data-name {
     color: #222A38;
@@ -7247,7 +7247,7 @@ li.ext_zip {
   .x-navigation {
     max-height: 50px;
     overflow: hidden;
-    background: #1b1e24;
+    background: #D6DBE3;
   }
   .x-navigation.x-navigation-panel {
     height: 50px;
