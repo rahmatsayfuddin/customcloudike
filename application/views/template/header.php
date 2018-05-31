@@ -48,6 +48,9 @@
 	<script src="<?php echo base_url()?>/asset/js/tree.jquery.js"></script>
 	<link rel="stylesheet" href="<?php echo base_url()?>/asset/css/jqtree.css">
 
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap2-toggle.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.js"></script>
+
 
 </head>
 
