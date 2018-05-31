@@ -46,6 +46,18 @@ class Users extends CI_Controller {
 		}
 	}
 
+	public function security($value='')
+	{
+		$user['data']= $this->m_users->get_basic_auth();
+		$content['data']=$this->load->view('security',$user,true);
+		$content['security']='active';
+		$data['content']=$this->load->view('template/user_panel',$content,true);	
+		$data['active']['account']='active';
+		if (isset($_SESSION['token']) ) {
+			$this->load->view('main',$data);
+		}
+	}
+
 	public function update()
 	{
 		$this->m_users->change_profile($_POST);
@@ -70,6 +82,41 @@ class Users extends CI_Controller {
 		redirect('users');
 	}
 
+	public function create_basic_auth()
+	{
+		$param=new stdClass();
+		$result=$this->m_users->create_basic_auth($param);
+		//echo json_encode($result);
+		redirect('users/security');
+	}
 
+	public function create_contacts_sync_auth()
+	{
+		$param=new stdClass();
+		$result=$this->m_users->create_contacts_sync_auth($param);
+		//echo json_encode($result);
+		redirect('users/contact');
+	}
+	public function remove_login($login)
+	{
+		$param['login']=base64_decode($login);
+		$result=$this->m_users->remove_login($param);
+		//echo json_encode($result);
+		//echo json_encode($param);
+		redirect('users/security');
+	}
+
+	public function contact($value='')
+	{
+		$user['data']= $this->m_users->get_contacts_sync_auth();
+		$content['data']=$this->load->view('contact',$user,true);
+		$content['contact']='active';
+		$data['content']=$this->load->view('template/user_panel',$content,true);	
+		$data['active']['account']='active';
+		if (isset($_SESSION['token']) ) {
+			$this->load->view('main',$data);
+		}
+
+	}
 
 }

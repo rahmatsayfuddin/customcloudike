@@ -169,7 +169,7 @@ class M_users extends CI_Model {
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => "https://saas.cloudike.com/api/2/events/?".http_build_query($param),
+			CURLOPT_URL => url_cloudike."/events/?".http_build_query($param),
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => "",
 			CURLOPT_MAXREDIRS => 10,
@@ -193,5 +193,160 @@ class M_users extends CI_Model {
 			return $result=json_decode($response,true);
 		}
 	}
+	public function get_basic_auth()
+	{
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => url_cloudike."/accounts/get_basic_auth/",
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => "",
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 30,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => "GET",
+			CURLOPT_HTTPHEADER => array(
+				"content-type: application/json",
+				"mountbit-auth: ".$_SESSION['token']
+			),
+		));
+
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+
+		curl_close($curl);
+
+		if ($err) {
+			echo "cURL Error #:" . $err;
+		} else {
+			return $result=json_decode($response,true);
+		}
+	}
+
+	public function remove_login($param)
+	{
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => url_cloudike."/accounts/remove_login/",
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => "",
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 30,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => "POST",
+			CURLOPT_POSTFIELDS => json_encode($param),
+			CURLOPT_HTTPHEADER => array(
+				"content-type: application/json",
+				"mountbit-auth: ".$_SESSION['token']
+			),
+		));
+
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+
+		curl_close($curl);
+
+		if ($err) {
+			echo "cURL Error #:" . $err;
+		} else {
+			return $result=json_decode($response,true);
+		}
+	}
+
+	public function create_basic_auth($param)
+	{
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => url_cloudike."/accounts/create_basic_auth/",
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => "",
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 30,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => "POST",
+			CURLOPT_POSTFIELDS => json_encode($param),
+			CURLOPT_HTTPHEADER => array(
+				"content-type: application/json",
+				"mountbit-auth: ".$_SESSION['token']
+			),
+		));
+
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+
+		curl_close($curl);
+
+		if ($err) {
+			echo "cURL Error #:" . $err;
+		} else {
+			return $result=json_decode($response,true);
+		}
+	}
+
+
+	public function get_contacts_sync_auth()
+	{
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => url_cloudike."/accounts/get_contacts_sync_auth/",
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => "",
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 30,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => "GET",
+			CURLOPT_HTTPHEADER => array(
+				"content-type: application/json",
+				"mountbit-auth: ".$_SESSION['token']
+			),
+		));
+
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+
+		curl_close($curl);
+
+		if ($err) {
+			echo "cURL Error #:" . $err;
+		} else {
+			return $result=json_decode($response,true);
+		}
+	}
+
+	public function create_contacts_sync_auth($param)
+	{
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => url_cloudike."/accounts/create_contacts_sync_auth/",
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => "",
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 30,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => "POST",
+			CURLOPT_POSTFIELDS => json_encode($param),
+			CURLOPT_HTTPHEADER => array(
+				"content-type: application/json",
+				"mountbit-auth: ".$_SESSION['token']
+			),
+		));
+
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+
+		curl_close($curl);
+
+		if ($err) {
+			echo "cURL Error #:" . $err;
+		} else {
+			return $result=json_decode($response,true);
+		}
+	}
+
+
 
 }
