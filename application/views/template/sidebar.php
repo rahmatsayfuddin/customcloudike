@@ -1,3 +1,9 @@
+<?php 
+
+$data_user=$this->get_account->get();
+$percent=$data_user['storage_size']/$data_user['hard_quota_size'];
+
+?>
 <!-- START PAGE SIDEBAR -->
 <div class="page-sidebar">
   <!-- START X-NAVIGATION -->
@@ -17,7 +23,9 @@
      <span class="fa fa-user fa-5x"></span>
    </div>
    <div class="profile-data">
-    <div class="profile-data-name"><a href="<?php echo site_url() ?>/users" style="color: #222A38;">John Doe</a></div>
+    <div class="profile-data-name"><a href="<?php echo site_url() ?>/users" style="color: #222A38;">
+      <?php echo $data_user['name'] ?>
+    </a></div>
   </div>
 </div>                                                                        
 </li>
@@ -71,8 +79,8 @@
                    <div class="profile-data">
                      <div class="profile-data-name">
                       <div class="progress">    
-                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                          <span>7.2 MB of 50.0 GB used</span>
+                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                          <span ><?php echo byte_format($data_user['storage_size']) ?> of <?php echo byte_format($data_user['hard_quota_size']) ?> used</span>
                         </div>
                       </div>
                     </div>
