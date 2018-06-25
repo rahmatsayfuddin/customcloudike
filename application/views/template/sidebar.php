@@ -1,8 +1,6 @@
 <?php 
 
 $data_user=$this->get_account->get();
-$percent=$data_user['storage_size']/$data_user['hard_quota_size'];
-
 ?>
 <!-- START PAGE SIDEBAR -->
 <div class="page-sidebar">
